@@ -2,6 +2,8 @@ require 'sinatra'
 require 'RMagick'
 require 'rvg/rvg'
 
+BG_COLORS = ["#DEF95D", "#F0A753", "#E383D6", "#D74B4A", "#A2EDB7", "#F2DC83", "#AB734D", "#634F55"]
+
 get '/' do
   "<h1>finitials</h1>"\
   " <p>Initials image service based on"\
@@ -16,8 +18,8 @@ get '/:initials' do
     width = params[:s] || 96
     height = width
     format = "png"
-    color = color_convert(params[:color]) || 'grey69'
-    text_color = color_convert(params[:textcolor]) || 'black'
+    color = get_rand_color()
+    text_color = 'white'
 
     rvg = Magick::RVG.new(width, height).viewbox(0, 0, width, height) do |canvas|
       canvas.background_fill = color
@@ -50,12 +52,8 @@ end
 
 private
 
-def color_convert(original)
-  if original
-    if original.index('!') == 0
-      original.tr('!', '#')
-    else
-      original
-    end
-  end
+def get_rand_color()
+  score = rand(0..7)
+
+  BG_COLORS[score]
 end
