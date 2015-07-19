@@ -2,11 +2,11 @@ require 'sinatra'
 require 'RMagick'
 require 'rvg/rvg'
 
-BG_COLORS = ["#F0A753", "#E383D6", "#D74B4A", "#A2EDB7", "#F2DC83", "#AB734D", "#634F55"]
+BG_COLORS = ["#F0A753", "#E383D6", "#D74B4A", "#A2EDB7", "#5D67AD", "#46D154", "#AB734D", "#634F55"]
 
 get '/' do
-  "<h1>finitials</h1>"\
-  " <p>Initials image service based on"\
+  "<h1>defatar</h1>"\
+  " <p>Default avatar image service based on"\
   " <a href='http://github.com/xxx/fakeimage'>http://github.com/xxx/fakeimage</a>"\
   " and the relevant fork"\
   " <a href='http://github.com/kmctown/fakeimage'>http://github.com/kmctown/fakeimage</a>."
