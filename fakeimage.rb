@@ -2,25 +2,20 @@ require 'sinatra'
 require 'RMagick'
 require 'rvg/rvg'
 
-FORMATS = {
-  "png" => "png",
-  "gif" => "gif",
-  "jpg" => "jpeg"
-}
-
 get '/' do
-  "<p>Welcome to fakeimage.</p><p>Please see the README (specifically the 'Use' section) at <a href='http://github.com/xxx/fakeimage'>http://github.com/xxx/fakeimage</a> for usage info so I don't have a chance to let one of the copies get out of date.</p><p>Example: <img src='/243x350.gif?color=darkorchid2&textcolor=!B9AF55' /></p><p>Code: <code>&lt;img src='http://fakeimage.heroku.com/243x350.gif?color=darkorchid2&textcolor=!B9AF55' /&gt;</code>"
+  "<h1>finitials</h1>"\
+  " <p>Initials image service based on"\
+  " <a href='http://github.com/xxx/fakeimage'>http://github.com/xxx/fakeimage</a>"\
+  " and the relevant fork"\
+  " <a href='http://github.com/kmctown/fakeimage'>http://github.com/kmctown/fakeimage</a>."
 end
 
-get '/:size' do
+get '/:initials' do
   begin
-    wh, format = params[:size].downcase.split('.')
-    format = FORMATS[format] || 'png'
-
-    width, height = wh.split('x').map { |wat| wat.to_i }
-
-    height = width unless height
-
+    initials = (params[:initials] || "--").upcase
+    width = params[:s] || 96
+    height = width
+    format = "png"
     color = color_convert(params[:color]) || 'grey69'
     text_color = color_convert(params[:textcolor]) || 'black'
 
@@ -33,19 +28,24 @@ get '/:size' do
     img.format = format
 
     drawable = Magick::Draw.new
-    drawable.pointsize = width / 10
-    drawable.font = ("./DroidSans.ttf")
+    drawable.pointsize = width / initials.length
+    drawable.font = ("./HelveticaNueue-Light.ttf")
     drawable.fill = text_color
     drawable.gravity = Magick::CenterGravity
-    drawable.annotate(img, 0, 0, 0, 0, "#{width} x #{height}")
+    drawable.annotate(img, 0, 0, 0, 0, "#{initials}")
 
     content_type "image/#{format}"
     img.to_blob
 
   rescue Exception => e
-    "<p>Something broke.  You can try <a href='/200x200'>this simple test</a>. If this error occurs there as well, you are probably missing app dependencies. Make sure RMagick is installed correctly. If the test works, you are probably passing bad params in the url.</p><p>Use this thing like http://host:port/200x300, or add color and textcolor params to decide color.</p><p>Error is: [<code>#{e}</code>]</p>"
+    "<p>Something broke.  You can try <a href='/200x200'>this simple test</a>."\
+    " If this error occurs there as well, you are probably missing app"\
+    " dependencies. Make sure RMagick is installed correctly. If the test works,"\
+    " you are probably passing bad params in the url.</p><p>Use this thing like"\
+    " http://host:port/200x300, or add color and textcolor params to decide color"\
+    " .</p><p>Error is: [<code>#{e}</code>]</p>"\
+    " <p>Params are:<br>Initials: #{initials}<br>Size: #{width}x#{height}</p>"
   end
-
 end
 
 private
