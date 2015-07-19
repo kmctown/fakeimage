@@ -2,7 +2,7 @@ require 'sinatra'
 require 'RMagick'
 require 'rvg/rvg'
 
-BG_COLORS = ["#DEF95D", "#F0A753", "#E383D6", "#D74B4A", "#A2EDB7", "#F2DC83", "#AB734D", "#634F55"]
+BG_COLORS = ["#F0A753", "#E383D6", "#D74B4A", "#A2EDB7", "#F2DC83", "#AB734D", "#634F55"]
 
 get '/' do
   "<h1>finitials</h1>"\
