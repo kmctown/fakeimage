@@ -32,7 +32,7 @@ get '/:initials' do
     img.format = format
 
     drawable = Magick::Draw.new
-    drawable.pointsize = 24
+    drawable.pointsize = 28
     drawable.font = ("./Roboto-Medium.ttf")
     drawable.fill = text_color
     drawable.gravity = Magick::CenterGravity
