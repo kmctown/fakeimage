@@ -2,7 +2,7 @@ require 'sinatra'
 require 'RMagick'
 require 'rvg/rvg'
 
-BG_COLORS = ["#F0A753", "#E383D6", "#D74B4A", "#A2EDB7", "#5D67AD", "#46D154", "#AB734D", "#634F55"]
+BG_COLORS = ["#67A0D6", "#BD59BA", "#F36D61", "#489FFF", "#A6975C", "#EFA65A", "#5D69AB", "#6E927B"]
 
 get '/' do
   "<h1>defatar</h1>"\
