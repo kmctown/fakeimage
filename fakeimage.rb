@@ -34,7 +34,7 @@ get '/:initials' do
     drawable.font = ("./Roboto-Medium.ttf")
     drawable.fill = text_color
     drawable.gravity = Magick::CenterGravity
-    drawable.annotate(img, 0, 0, 0, 3, "#{initials}")
+    drawable.annotate(img, 0, 0, 0, 0, "#{initials}")
 
     content_type "image/#{format}"
     img.to_blob
