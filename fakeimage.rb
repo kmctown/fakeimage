@@ -15,7 +15,7 @@ end
 get '/:initials' do
   begin
     initials = (params[:initials] || "--").upcase
-    width = params[:s] || 96
+    width = params[:s] || 64
     height = width
     format = "png"
     color = get_rand_color()
@@ -30,11 +30,11 @@ get '/:initials' do
     img.format = format
 
     drawable = Magick::Draw.new
-    drawable.pointsize = width / initials.length
-    drawable.font = ("./HelveticaNueue-Light.ttf")
+    drawable.pointsize = 24
+    drawable.font = ("./Roboto-Medium.ttf")
     drawable.fill = text_color
     drawable.gravity = Magick::CenterGravity
-    drawable.annotate(img, 0, 0, 0, 0, "#{initials}")
+    drawable.annotate(img, 0, 0, 0, 3, "#{initials}")
 
     content_type "image/#{format}"
     img.to_blob
