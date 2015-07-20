@@ -14,6 +14,8 @@ end
 
 get '/:initials' do
   begin
+    cache_control :no_cache, :must_revalidate
+
     initials = (params[:initials] || "--").upcase
     width = params[:s] || 64
     height = width
